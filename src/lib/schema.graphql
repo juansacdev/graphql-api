@@ -1,0 +1,6 @@
+type Query {
+    "Retorna un saludo al mundo"
+    hello: String
+    "Retorna un saludo a todos"
+    saludo: String
+}
