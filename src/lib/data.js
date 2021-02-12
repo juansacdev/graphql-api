@@ -1,4 +1,4 @@
-module.exports = [
+const courses = [
     {
         _id: "1",
         title: '1 Title',
@@ -21,3 +21,26 @@ module.exports = [
         topic: '3 Topic',
     }
 ]
+
+const students = [
+    {
+        _id: "1",
+        name: '1 name',
+        email: '1 email',
+    },
+    {
+        _id: "2",
+        name: '2 name',
+        email: '2 email',
+    },
+    {
+        _id: "3",
+        name: '3 name',
+        email: '3 email',
+    }
+]
+
+module.exports = {
+    courses,
+    students,
+}
