@@ -4,6 +4,7 @@ type Course {
     teacher: String!
     description: String
     topic: String
+    people: [Student]
 }
 
 type Student {

@@ -10,6 +10,6 @@ module.exports = {
     createStudent: (root, { input }) => {
         console.log(input);
         return input
-    }
+    },
 
 }
