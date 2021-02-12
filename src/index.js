@@ -12,7 +12,7 @@ const port = 3000
 
 
 
-// Definimos el schema inical
+// Definimos el Schema
 const typeDefs = readFileSync(
     join(__dirname, 'lib', 'schema.graphql'),
     'utf-8'
