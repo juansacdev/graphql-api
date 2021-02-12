@@ -1,9 +1,10 @@
-const { graphql, buildSchema } = require('graphql')
+const { makeExecutableSchema } = require('graphql-tools')
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
 const { readFileSync } = require('fs')
 const { join } = require('path')
 const resolvers = require('./lib/resolvers')
+
 
 // inicializamos express en una app
 const app = express()
@@ -12,11 +13,11 @@ const port = 3000
 
 
 // Definimos el schema inical
-const schema = buildSchema (
-    readFileSync(
-        join(__dirname, 'lib', 'schema.graphql'), 'utf-8'
-    )
+const typeDefs = readFileSync(
+    join(__dirname, 'lib', 'schema.graphql'),
+    'utf-8'
 )
+const schema = makeExecutableSchema ({ typeDefs, resolvers })
 
 
 // Definimos el endpoin y usamos el middleware
