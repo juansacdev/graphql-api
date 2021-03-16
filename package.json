@@ -1,0 +1,14 @@
+{
+  "name": "graphql-course",
+  "version": "1.0.0",
+  "description": "A project for practice graphql ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@juansacok Juan Sebastián Agudelo",
+  "license": "MIT",
+  "dependencies": {
+    "graphql": "^15.5.0"
+  }
+}
