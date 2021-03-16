@@ -2,13 +2,19 @@
   "name": "graphql-course",
   "version": "1.0.0",
   "description": "A project for practice graphql ",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "dev": "nodemon -e js,graphql src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "@juansacok Juan Sebastián Agudelo",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
     "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }
