@@ -2,15 +2,24 @@ const courses = require('./data')
 
 module.exports = {
 
-    hello: () => {
-        return 'Hola mundo con GraphQL'
-    },
+    Query: {
 
-    saludo: () => {
-        return 'Hola a todos desde GraphQL'
-    },
+        hello: () => {
+            return 'Hola mundo con GraphQL'
+        },
 
-    getCourses: () => {
-        return courses
+        saludo: () => {
+            return 'Hola a todos desde GraphQL'
+        },
+
+        getCourses: () => {
+            return courses
+        },
+
+        getCourse: (root, { id }) => {
+            return courses.find(course => course._id === id)
+        },
+
     }
+
 }

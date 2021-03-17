@@ -1,14 +1,18 @@
+# Queries
 type Query {
     "Devuelve un saludo al mundo"
     hello: String
     "Devuelve un saludo a todos"
     saludo: String
     "Devuelve una lista de todos los cursos"
-    getCourses: [Course]
+    getCourses: [Course!]!
+    "Devuelve un curso en especifico, pasandole como argumento un id!"
+    getCourse(id: ID!): Course
 }
 
+# Custom types
 type Course {
-    id: ID!
+    _id: ID!
     title: String!
     teacher: String!
     description: String
