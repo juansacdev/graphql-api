@@ -1,3 +1,5 @@
+const courses = require('./data')
+
 module.exports = {
 
     hello: () => {
@@ -6,5 +8,9 @@ module.exports = {
 
     saludo: () => {
         return 'Hola a todos desde GraphQL'
+    },
+
+    getCourses: () => {
+        return courses
     }
 }

@@ -1,4 +1,16 @@
 type Query {
+    "Devuelve un saludo al mundo"
     hello: String
+    "Devuelve un saludo a todos"
     saludo: String
+    "Devuelve una lista de todos los cursos"
+    getCourses: [Course]
+}
+
+type Course {
+    id: ID!
+    title: String!
+    teacher: String!
+    description: String
+    topic: String
 }
