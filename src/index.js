@@ -5,8 +5,8 @@ const { PORT } = require('./setting')
 const { join } = require('path')
 const graphQLResolvers = require('./lib/resolvers')
 const express = require('express')
-const { type } = require('os')
 const app = express()
+require('./db')
 
 // Reading GraphQL Schema
 const schema = readFileSync (
