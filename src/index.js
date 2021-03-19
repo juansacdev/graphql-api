@@ -19,11 +19,13 @@ const grapqhQLSchema = makeExecutableSchema({
 })
 
 // Inicialization & Middlewares
-app.use('/', graphqlHTTP({
-    schema: grapqhQLSchema,
-    rootValue: graphQLResolvers,
-    graphiql: true,
-}))
+app.use('/graphql',
+    graphqlHTTP({
+        schema: grapqhQLSchema,
+        rootValue: graphQLResolvers,
+        graphiql: true,
+    })
+)
 
 //  Listening
-app.listen(PORT, () => console.log(`http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`http://localhost:${PORT}/graphql`))

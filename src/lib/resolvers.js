@@ -1,4 +1,4 @@
-const courses = require('./data')
+const Course = require("./models/Course")
 
 module.exports = {
 
@@ -12,13 +12,9 @@ module.exports = {
             return 'Hola a todos desde GraphQL'
         },
 
-        getCourses: () => {
-            return courses
-        },
+        getCourses: () => Course.find(),
 
-        getCourse: (root, { id }) => {
-            return courses.find(course => course._id === id)
-        },
+        getCourse: (root, { id }) => Course.findById(id),
 
     }
 
