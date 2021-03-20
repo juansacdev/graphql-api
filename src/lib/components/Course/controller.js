@@ -17,14 +17,28 @@ const createOneCourse = async ( input ) => {
     const fulldata = {...defaults, ...input }
 
     const course = new Course(fulldata)
+
     await course.save()
     return course
 
 }
 
+// Edita un curso
+const editOneCourse = async (id, input) => {
+
+    const courseEdited = await Course.findByIdAndUpdate(
+        id, input, {
+            new: true,
+        }
+    )
+    await courseEdited.save()
+    return courseEdited
+
+}
 
 module.exports ={
     getAllCourses,
     getOneCourseById,
-    createOneCourse
+    createOneCourse,
+    editOneCourse,
 }

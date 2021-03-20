@@ -18,12 +18,18 @@ type Mutation {
     "Crea un curso pasandole los campos que debe llevar un curso"
     createCourse(input: CourseInput!): Course!
     "Edita un curso"
-    editCourse(input: CourseEditInput!): Course!
+    editCourse(
+        id: ID!,
+        input: CourseEditInput!
+    ): Course!
 
     "Crea un estudiante pasandole los campos que debe llevar un estudiante"
     createStudent(input: StudentInput!): Student!
     "Edita un estudiante"
-    editStudent(input: StudentEditInput!): Student!
+    editStudent(
+        id: ID!,
+        input: StudentEditInput!
+    ): Student!
 
 }
 

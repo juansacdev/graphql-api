@@ -1,4 +1,4 @@
-const data = [
+exports.data = [
     {
         "title": "Programación basica",
         "teacher": "Freddy Vega",
@@ -18,5 +18,3 @@ const data = [
         "topic": "Logica, algoritmos"
     }
 ]
-
-module.exports = data

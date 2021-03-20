@@ -5,7 +5,7 @@ const {
 
 const {
     getAllStudents,
-    getOneStudnetById,
+    getOneStudentById,
 } = require('./components/Student/controller')
 
 module.exports = {
@@ -18,7 +18,6 @@ module.exports = {
     // Students Queries
     getStudents: () => getAllStudents(),
 
-    getStudent: (_, { id }) => getOneStudnetById(id),
-
+    getStudent: (_, { id }) => getOneStudentById(id),
 
 }

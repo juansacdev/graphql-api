@@ -13,6 +13,7 @@ const schema = readFileSync (
     join(__dirname, 'lib', 'schema.graphql'),
     'utf-8'
 )
+
 const grapqhQLSchema = makeExecutableSchema({
     typeDefs: schema,
     resolvers: graphQLResolvers,
