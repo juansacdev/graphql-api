@@ -1,18 +1,32 @@
 # Queries
 type Query {
     "Devuelve un saludo al mundo"
-    hello: String
+    hello: String!
     "Devuelve un saludo a todos"
-    saludo: String
+    saludo: String!
     "Devuelve una lista de todos los cursos"
     getCourses: [Course!]!
     "Devuelve un curso en especifico, pasandole como argumento un id!"
-    getCourse(id: ID!): Course
+    getCourse(id: ID!): Course!
+}
+
+# Mutations
+type Mutation {
+    "Crea un curso pasandole los campos que debe llevar un curso"
+    createCourse(input: CourseInput!): Course!
 }
 
 # Custom types
 type Course {
     id: ID!
+    title: String!
+    teacher: String!
+    description: String
+    topic: String
+}
+
+# Inputs
+input CourseInput {
     title: String!
     teacher: String!
     description: String
