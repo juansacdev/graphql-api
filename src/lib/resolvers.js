@@ -1,31 +1,9 @@
-const {
-    getAllCourses,
-    getOneCourseById,
-    createOneCourse,
-} = require('./components/Course/controller')
+const mutations = require('./mutations')
+const queries = require('./queries')
 
 module.exports = {
 
-    Query: {
-
-        hello: () => {
-            return 123
-        },
-
-        saludo: () => {
-            return 'Hola a todos desde GraphQL'
-        },
-
-        getCourses: () => getAllCourses(),
-
-        getCourse: (_, { id }) => getOneCourseById(id),
-
-    },
-
-    Mutation: {
-
-        createCourse: (_, { input }) => createOneCourse(input),
-
-    },
+    Query: queries,
+    Mutation: mutations,
 
 }
