@@ -21,12 +21,13 @@ type Mutation {
 	deleteCourse(id: ID!): Course
 	"Agrega una persona a un curso"
 	addPerson(courseId: ID!, personId: ID!): Course
+	"Quita a un estudiante de un curso"
+	removePersonFromCourse(courseId: ID!, personId: ID!): Course
 
 	"Crea un estudiante pasandole los campos que debe llevar un estudiante"
 	createStudent(input: StudentInput!): Student!
 	"Edita un estudiante"
 	editStudent(id: ID!, input: StudentEditInput!): Student
-
 	"Elimina un estudiante"
 	deleteStudent(id: ID!): Student
 }
@@ -38,6 +39,7 @@ type Course {
 	teacher: String!
 	description: String
 	topic: String
+	level: Level
 	person: [Student]
 }
 
@@ -53,6 +55,7 @@ input CourseInput {
 	teacher: String!
 	description: String
 	topic: String
+	level: Level
 }
 
 input CourseEditInput {
@@ -60,6 +63,7 @@ input CourseEditInput {
 	teacher: String
 	description: String
 	topic: String
+	level: Level
 }
 
 input StudentInput {
@@ -70,4 +74,11 @@ input StudentInput {
 input StudentEditInput {
 	name: String
 	email: String
+}
+
+# Enums
+enum Level {
+	Principiante
+	Intermedio
+	Avanzado
 }

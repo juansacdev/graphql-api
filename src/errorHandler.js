@@ -1,4 +1,6 @@
-exports.errorHandler = (error) => {
+const errorHandler = (error) => {
 	console.error(error);
-	throw new Error("Fallo en la operacion del servidor" );
-}
+	throw new Error("Fallo en la operacion del servidor");
+};
+
+module.exports = errorHandler

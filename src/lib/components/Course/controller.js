@@ -113,6 +113,40 @@ const addOnePersonToCourse = (courseId, personId) => {
 	});
 };
 
+const removePersonFromOneCourse = (courseId, personId) => {
+	return new Promise(async (resolve, reject) => {
+		const course = Course.findById(courseId);
+		const person = Student.findById(personId);
+
+		if (!course || !person) {
+			reject("El curso o la persona no encontrado");
+			return false;
+		}
+
+		const courseUpdated = await Course.findByIdAndUpdate(
+			courseId,
+			{
+				$pull: { person: personId },
+			},
+			{
+				new: true,
+			},
+		);
+
+		await courseUpdated.save();
+
+		Course.findById(courseId)
+			.populate("person")
+			.exec((error, person) => {
+				if (error) {
+					reject(error);
+					return false;
+				}
+				resolve(person);
+			});
+	});
+};
+
 module.exports = {
 	getAllCourses,
 	getOneCourseById,
@@ -120,4 +154,5 @@ module.exports = {
 	editOneCourse,
 	deleteOneCourse,
 	addOnePersonToCourse,
+	removePersonFromOneCourse,
 };

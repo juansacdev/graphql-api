@@ -3,6 +3,7 @@ const {
 	editOneCourse,
 	deleteOneCourse,
 	addOnePersonToCourse,
+	removePersonFromOneCourse,
 } = require("../components/Course/controller");
 
 const {
@@ -21,6 +22,9 @@ module.exports = {
 
 	addPerson: (_, { courseId, personId }) =>
 		addOnePersonToCourse(courseId, personId),
+
+	removePersonFromCourse: (_, { courseId, personId }) =>
+		removePersonFromOneCourse(courseId, personId),
 
 	// Students Mutations
 	createStudent: (_, { input }) => createOneStudent(input),
