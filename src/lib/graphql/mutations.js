@@ -2,13 +2,13 @@ const {
 	createOneCourse,
 	editOneCourse,
 	deleteOneCourse,
-} = require("./components/Course/controller");
+} = require("../components/Course/controller");
 
 const {
 	createOneStudent,
 	editOneStudent,
 	deleteOneStudent,
-} = require("./components/Student/controller");
+} = require("../components/Student/controller");
 
 module.exports = {
 	// Courses Mutations

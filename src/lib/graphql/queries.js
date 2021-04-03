@@ -1,12 +1,12 @@
 const {
 	getAllCourses,
 	getOneCourseById,
-} = require("./components/Course/controller");
+} = require("../components/Course/controller");
 
 const {
 	getAllStudents,
 	getOneStudentById,
-} = require("./components/Student/controller");
+} = require("../components/Student/controller");
 
 module.exports = {
 	// Courses Queries
