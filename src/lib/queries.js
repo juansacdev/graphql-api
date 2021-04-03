@@ -1,23 +1,21 @@
 const {
-    getAllCourses,
-    getOneCourseById,
-} = require('./components/Course/controller')
+	getAllCourses,
+	getOneCourseById,
+} = require("./components/Course/controller");
 
 const {
-    getAllStudents,
-    getOneStudentById,
-} = require('./components/Student/controller')
+	getAllStudents,
+	getOneStudentById,
+} = require("./components/Student/controller");
 
 module.exports = {
+	// Courses Queries
+	getCourses: () => getAllCourses(),
 
-    // Courses Queries
-    getCourses: () => getAllCourses(),
+	getCourse: (_, { id }) => getOneCourseById(id),
 
-    getCourse: (_, { id }) => getOneCourseById(id),
+	// Students Queries
+	getStudents: () => getAllStudents(),
 
-    // Students Queries
-    getStudents: () => getAllStudents(),
-
-    getStudent: (_, { id }) => getOneStudentById(id),
-
-}
+	getStudent: (_, { id }) => getOneStudentById(id),
+};

@@ -1,23 +1,27 @@
 const {
-    createOneCourse,
-    editOneCourse,
-} = require('./components/Course/controller')
+	createOneCourse,
+	editOneCourse,
+	deleteOneCourse,
+} = require("./components/Course/controller");
 
 const {
-    createOneStudent,
-    editOneStudent,
-} = require('./components/Student/controller')
+	createOneStudent,
+	editOneStudent,
+	deleteOneStudent,
+} = require("./components/Student/controller");
 
 module.exports = {
+	// Courses Mutations
+	createCourse: (_, { input }) => createOneCourse(input),
 
-    // Courses Mutations
-    createCourse: (_, { input }) => createOneCourse(input),
+	editCourse: (_, { id, input }) => editOneCourse(id, input),
 
-    editCourse: (_, { id, input }) => editOneCourse(id, input),
+	deleteCourse: (_, { id }) => deleteOneCourse(id),
 
-    // Students Mutations
-    createStudent: (_, { input }) => createOneStudent(input),
+	// Students Mutations
+	createStudent: (_, { input }) => createOneStudent(input),
 
-    editStudent: (_, { id, input }) => editOneStudent(id, input),
+	editStudent: (_, { id, input }) => editOneStudent(id, input),
 
-}
+	deleteStudent: (_, { id }) => deleteOneStudent(id),
+};

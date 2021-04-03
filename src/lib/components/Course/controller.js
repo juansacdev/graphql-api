@@ -1,44 +1,42 @@
-const Course = require("./model")
+const Course = require("./model");
 
 // Busca y devuelve todos los elementos
-const getAllCourses = () => Course.find()
+const getAllCourses = () => Course.find();
 
 // Busca por ID y devuelve el elemento que haga matche
-const getOneCourseById = id => Course.findById( id )
+const getOneCourseById = (id) => Course.findById(id);
 
 // Crea un curso
-const createOneCourse = async ( input ) => {
+const createOneCourse = async (input) => {
+	const defaults = {
+		description: "",
+		topic: "",
+	};
 
-    const defaults = {
-        description: '',
-        topic: '',
-    }
+	const fulldata = { ...defaults, ...input };
 
-    const fulldata = {...defaults, ...input }
+	const course = new Course(fulldata);
 
-    const course = new Course(fulldata)
-
-    await course.save()
-    return course
-
-}
+	await course.save();
+	return course;
+};
 
 // Edita un curso
 const editOneCourse = async (id, input) => {
+	const courseEdited = await Course.findByIdAndUpdate(id, input, {
+		new: true,
+	});
+	await courseEdited.save();
+	return courseEdited;
+};
 
-    const courseEdited = await Course.findByIdAndUpdate(
-        id, input, {
-            new: true,
-        }
-    )
-    await courseEdited.save()
-    return courseEdited
+// Elimina un curso
+const deleteOneCourse = (id) => Course.findByIdAndDelete(id);
 
-}
-
-module.exports ={
-    getAllCourses,
-    getOneCourseById,
-    createOneCourse,
-    editOneCourse,
-}
+module.exports = {
+	getAllCourses,
+	getOneCourseById,
+	createOneCourse,
+	editOneCourse,
+	deleteOneCourse,
+};
