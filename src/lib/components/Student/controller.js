@@ -1,4 +1,5 @@
 const Student = require("./model");
+const errorHandler = require("../../../errorHandler");
 
 // Busca y devuelve todos los elementos
 const getAllStudents = () => Student.find();
@@ -8,19 +9,27 @@ const getOneStudentById = (id) => Student.findById(id);
 
 // Crea un estudiante
 const createOneStudent = async (input) => {
-	const student = new Student(input);
-	await student.save();
-	return student;
+	try {
+		const student = new Student(input);
+		await student.save();
+		return student;
+	} catch (error) {
+		errorHandler(error);
+	}
 };
 
 // Edita un estudiante
 const editOneStudent = async (id, input) => {
-	const studentEdited = await Student.findByIdAndUpdate(id, input, {
-		new: true,
-	});
+	try {
+		const studentEdited = await Student.findByIdAndUpdate(id, input, {
+			new: true,
+		});
 
-	await studentEdited.save();
-	return studentEdited;
+		await studentEdited.save();
+		return studentEdited;
+	} catch (error) {
+		errorHandler(error);
+	}
 };
 
 // Elimina un estudiante
