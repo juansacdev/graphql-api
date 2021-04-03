@@ -14,6 +14,10 @@ const CourseSchema = new Schema(
 
 		description: String,
 		topic: String,
+		person: [{
+			type: Schema.Types.ObjectId,
+			ref: "Student",
+		}],
 	},
 	{
 		timestamps: true,
