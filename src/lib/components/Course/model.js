@@ -18,12 +18,16 @@ const CourseSchema = new Schema(
 			type: String,
 			enum: ["Principiante", "Intermedio", "Avanzado"],
 		},
-		person: [
+		student: [
 			{
 				type: Schema.Types.ObjectId,
 				ref: "Student",
 			},
 		],
+		teacher: {
+			type: Schema.Types.ObjectId,
+			ref: "Teacher",
+		},
 	},
 	{
 		timestamps: true,

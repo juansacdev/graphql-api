@@ -1,5 +1,7 @@
 const Course = require("./model");
 const Student = require("../Student/model");
+const Teacher = require("../Teacher/model");
+
 const errorHandler = require("../../../errorHandler");
 
 // Busca y devuelve todos los elementos
@@ -7,13 +9,14 @@ const getAllCourses = () => {
 	try {
 		return new Promise((resolve, reject) => {
 			Course.find()
-				.populate("person")
-				.exec((error, person) => {
+				.populate("student")
+				.populate("teacher")
+				.exec((error, data) => {
 					if (error) {
 						reject(error);
 						return false;
 					}
-					resolve(person);
+					resolve(data);
 				});
 		});
 	} catch (error) {
@@ -26,13 +29,14 @@ const getOneCourseById = async (id) => {
 	try {
 		return new Promise((resolve, reject) => {
 			Course.findById(id)
-				.populate("person")
-				.exec((error, person) => {
+				.populate("student")
+				.populate("teacher")
+				.exec((error, data) => {
 					if (error) {
 						reject(error);
 						return false;
 					}
-					resolve(person);
+					resolve(data);
 				});
 		});
 	} catch (error) {
@@ -75,22 +79,22 @@ const editOneCourse = async (id, input) => {
 // Elimina un curso
 const deleteOneCourse = async (id) => await Course.findByIdAndDelete(id);
 
-// Agrega una persona a un curso
-const addOnePersonToCourse = (courseId, personId) => {
+// Agrega un estudiante a un curso
+const addOneStudentToCourse = (courseId, studentId) => {
 	return new Promise(async (resolve, reject) => {
 		try {
 			const course = Course.findById(courseId);
-			const person = Student.findById(personId);
+			const student = Student.findById(studentId);
 
-			if (!course || !person) {
-				reject("El curso o la persona no encontrado");
+			if (!course || !student) {
+				reject("El curso o el estudiante no encontrado");
 			}
 
 			const courseUpdated = await Course.findByIdAndUpdate(
 				courseId,
 				{
 					$addToSet: {
-						person: personId,
+						student: studentId,
 					},
 				},
 				{ new: true },
@@ -99,13 +103,14 @@ const addOnePersonToCourse = (courseId, personId) => {
 			await courseUpdated.save();
 
 			Course.findById(courseId)
-				.populate("person")
-				.exec((error, person) => {
+				.populate("student")
+				.populate("teacher")
+				.exec((error, data) => {
 					if (error) {
 						reject(error);
 						return false;
 					}
-					resolve(person);
+					resolve(data);
 				});
 		} catch (error) {
 			errorHandler(error);
@@ -113,20 +118,21 @@ const addOnePersonToCourse = (courseId, personId) => {
 	});
 };
 
-const removePersonFromOneCourse = (courseId, personId) => {
+// Elimina un estudiante de un curso
+const removeStudentFromOneCourse = (courseId, studentId) => {
 	return new Promise(async (resolve, reject) => {
 		const course = Course.findById(courseId);
-		const person = Student.findById(personId);
+		const student = Student.findById(studentId);
 
-		if (!course || !person) {
-			reject("El curso o la persona no encontrado");
+		if (!course || !student) {
+			reject("El curso o el estudiante no encontrado");
 			return false;
 		}
 
 		const courseUpdated = await Course.findByIdAndUpdate(
 			courseId,
 			{
-				$pull: { person: personId },
+				$pull: { student: studentId },
 			},
 			{
 				new: true,
@@ -136,13 +142,91 @@ const removePersonFromOneCourse = (courseId, personId) => {
 		await courseUpdated.save();
 
 		Course.findById(courseId)
-			.populate("person")
-			.exec((error, person) => {
+			.populate("student")
+			.populate("teacher")
+			.exec((error, data) => {
 				if (error) {
 					reject(error);
 					return false;
 				}
-				resolve(person);
+				resolve(data);
+			});
+	});
+};
+
+// Agrega un profesor a un curso
+const addOneTeacherToCourse = (courseId, teacherId) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const course = Course.findById(courseId);
+			const teacher = Teacher.findById(teacherId);
+
+			if (!course || !teacher) {
+				reject("El curso o el estudiante no encontrado");
+			}
+
+			const courseUpdated = await Course.findByIdAndUpdate(
+				courseId,
+				{
+					$set: {
+						teacher: teacherId,
+					},
+				},
+				{ new: true },
+			);
+
+			await courseUpdated.save();
+
+			Course.findById(courseId)
+				.populate("teacher")
+				.populate("student")
+				.exec((error, data) => {
+					if (error) {
+						reject(error);
+						return false;
+					}
+					resolve(data);
+				});
+		} catch (error) {
+			errorHandler(error);
+		}
+	});
+};
+
+// Elimina un profesor de un curso
+const removeTeacherFromOneCourse = (courseId, teacherId) => {
+	return new Promise(async (resolve, reject) => {
+		const course = Course.findById(courseId);
+		const teacher = Teacher.findById(teacherId);
+
+		if (!course || !teacher) {
+			reject("El curso o el profesor no encontrado");
+			return false;
+		}
+
+		const courseUpdated = await Course.findByIdAndUpdate(
+			courseId,
+			{
+				$unset: {
+					teacher: "",
+				},
+			},
+			{
+				new: true,
+			},
+		);
+
+		await courseUpdated.save();
+
+		Course.findById(courseId)
+			.populate("teacher")
+			.populate("student")
+			.exec((error, data) => {
+				if (error) {
+					reject(error);
+					return false;
+				}
+				resolve(data);
 			});
 	});
 };
@@ -153,6 +237,8 @@ module.exports = {
 	createOneCourse,
 	editOneCourse,
 	deleteOneCourse,
-	addOnePersonToCourse,
-	removePersonFromOneCourse,
+	addOneStudentToCourse,
+	removeStudentFromOneCourse,
+	addOneTeacherToCourse,
+	removeTeacherFromOneCourse,
 };

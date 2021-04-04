@@ -1,3 +1,75 @@
+# Enums
+enum Level {
+	Principiante
+	Intermedio
+	Avanzado
+}
+
+# Interfaces
+interface Person {
+	id: ID!
+	name: String!
+	email: String!
+}
+
+# Custom types
+type Student implements Person {
+	id: ID!
+	name: String!
+	email: String!
+	avatar: String
+}
+
+type Teacher implements Person {
+	id: ID!
+	name: String!
+	email: String!
+	age: Int
+}
+
+type Course {
+	id: ID!
+	title: String!
+	teacher: Teacher!
+	description: String
+	topic: String
+	level: Level
+	student: [Student]
+}
+
+# Inputs
+input CourseInput {
+	title: String!
+	# teacher: PersonInput!
+	description: String
+	topic: String
+	level: Level
+	# student: PersonInput
+}
+
+input CourseEditInput {
+	title: String
+	# teacher: PersonEditInput
+	description: String
+	topic: String
+	level: Level
+	# student: PersonEditInput
+}
+
+input PersonInput {
+	name: String!
+	email: String!
+	avatar: String
+	age: Int
+}
+
+input PersonEditInput {
+	name: String
+	email: String
+	avatar: String
+	age: Int
+}
+
 # Queries
 type Query {
 	"Devuelve una lista de todos los cursos"
@@ -9,6 +81,11 @@ type Query {
 	getStudents: [Student!]!
 	"Devuelve un estudiante en especifico, pasandole como argumento un id!"
 	getStudent(id: ID!): Student
+
+	"Devuelve una lista de todos los profesores"
+	getTeachers: [Teacher!]!
+	"Devuelve un profesor en especifico, pasandole como argumento un id!"
+	getTeacher(id: ID!): Teacher
 }
 
 # Mutations
@@ -19,66 +96,26 @@ type Mutation {
 	editCourse(id: ID!, input: CourseEditInput!): Course
 	"Elimina un curso"
 	deleteCourse(id: ID!): Course
-	"Agrega una persona a un curso"
-	addPerson(courseId: ID!, personId: ID!): Course
+	"Agrega un estudiante a un curso"
+	addStudent(courseId: ID!, studentId: ID!): Course
 	"Quita a un estudiante de un curso"
-	removePersonFromCourse(courseId: ID!, personId: ID!): Course
+	removeStudentFromCourse(courseId: ID!, studentId: ID!): Course
+	"Agrega un estudiante a un curso"
+	addTeacher(courseId: ID!, teacherId: ID!): Course
+	"Quita a un estudiante de un curso"
+	removeTeacherFromCourse(courseId: ID!, teacherId: ID!): Course
 
-	"Crea un estudiante pasandole los campos que debe llevar un estudiante"
-	createStudent(input: StudentInput!): Student!
+	"Crea un estudiante pasandole el campo avatar"
+	createStudent(input: PersonInput!): Person!
 	"Edita un estudiante"
-	editStudent(id: ID!, input: StudentEditInput!): Student
-	"Elimina un estudiante"
-	deleteStudent(id: ID!): Student
-}
+	editStudent(id: ID!, input: PersonEditInput!): Person
+	"Elimina un un estudiante"
+	deleteStudent(id: ID!): Person
 
-# Custom types
-type Course {
-	id: ID!
-	title: String!
-	teacher: String!
-	description: String
-	topic: String
-	level: Level
-	person: [Student]
-}
-
-type Student {
-	id: ID!
-	name: String!
-	email: String!
-}
-
-# Inputs
-input CourseInput {
-	title: String!
-	teacher: String!
-	description: String
-	topic: String
-	level: Level
-}
-
-input CourseEditInput {
-	title: String
-	teacher: String
-	description: String
-	topic: String
-	level: Level
-}
-
-input StudentInput {
-	name: String!
-	email: String!
-}
-
-input StudentEditInput {
-	name: String
-	email: String
-}
-
-# Enums
-enum Level {
-	Principiante
-	Intermedio
-	Avanzado
+	"Crea un profesor pasandole el campo age"
+	createTeacher(input: PersonInput!): Person!
+	"Edita un profesor"
+	editTeacher(id: ID!, input: PersonEditInput!): Person
+	"Elimina un un profesor"
+	deleteTeacher(id: ID!): Person
 }

@@ -2,8 +2,10 @@ const {
 	createOneCourse,
 	editOneCourse,
 	deleteOneCourse,
-	addOnePersonToCourse,
-	removePersonFromOneCourse,
+	addOneStudentToCourse,
+	removeStudentFromOneCourse,
+	addOneTeacherToCourse,
+	removeTeacherFromOneCourse,
 } = require("../components/Course/controller");
 
 const {
@@ -12,24 +14,37 @@ const {
 	deleteOneStudent,
 } = require("../components/Student/controller");
 
+const {
+	createOneTeacher,
+	editOneTeacher,
+	deleteOneTeacher,
+} = require("../components/Teacher/controller");
+
 module.exports = {
 	// Courses Mutations
 	createCourse: (_, { input }) => createOneCourse(input),
-
 	editCourse: (_, { id, input }) => editOneCourse(id, input),
-
 	deleteCourse: (_, { id }) => deleteOneCourse(id),
 
-	addPerson: (_, { courseId, personId }) =>
-		addOnePersonToCourse(courseId, personId),
+	addStudent: (_, { courseId, studentId }) =>
+		addOneStudentToCourse(courseId, studentId),
 
-	removePersonFromCourse: (_, { courseId, personId }) =>
-		removePersonFromOneCourse(courseId, personId),
+	removeStudentFromCourse: (_, { courseId, studentId }) =>
+		removeStudentFromOneCourse(courseId, studentId),
+
+	addTeacher: (_, { courseId, teacherId }) =>
+		addOneTeacherToCourse(courseId, teacherId),
+
+	removeTeacherFromCourse: (_, { courseId, teacherId }) =>
+		removeTeacherFromOneCourse(courseId, teacherId),
 
 	// Students Mutations
 	createStudent: (_, { input }) => createOneStudent(input),
-
 	editStudent: (_, { id, input }) => editOneStudent(id, input),
-
 	deleteStudent: (_, { id }) => deleteOneStudent(id),
+
+	// Teachers Mutations
+	createTeacher: (_, { input }) => createOneTeacher(input),
+	editTeacher: (_, { id, input }) => editOneTeacher(id, input),
+	deleteTeacher: (_, { id }) => deleteOneTeacher(id),
 };
