@@ -1,18 +1,15 @@
-# Enums
 enum Level {
 	Principiante
 	Intermedio
 	Avanzado
 }
 
-# Interfaces
 interface Person {
 	id: ID!
 	name: String!
 	email: String!
 }
 
-# Custom types
 type Student implements Person {
 	id: ID!
 	name: String!
@@ -37,7 +34,6 @@ type Course {
 	student: [Student]
 }
 
-# Inputs
 input CourseInput {
 	title: String!
 	# teacher: PersonInput!
@@ -70,52 +66,31 @@ input PersonEditInput {
 	age: Int
 }
 
-# Queries
 type Query {
-	"Devuelve una lista de todos los cursos"
 	getCourses: [Course!]!
-	"Devuelve un curso en especifico, pasandole como argumento un id!"
 	getCourse(id: ID!): Course
 
-	"Devuelve una lista de todos los estudiantes"
 	getStudents: [Student!]!
-	"Devuelve un estudiante en especifico, pasandole como argumento un id!"
 	getStudent(id: ID!): Student
 
-	"Devuelve una lista de todos los profesores"
 	getTeachers: [Teacher!]!
-	"Devuelve un profesor en especifico, pasandole como argumento un id!"
 	getTeacher(id: ID!): Teacher
 }
 
-# Mutations
 type Mutation {
-	"Crea un curso pasandole los campos que debe llevar un curso"
 	createCourse(input: CourseInput!): Course!
-	"Edita un curso"
 	editCourse(id: ID!, input: CourseEditInput!): Course
-	"Elimina un curso"
 	deleteCourse(id: ID!): Course
-	"Agrega un estudiante a un curso"
 	addStudent(courseId: ID!, studentId: ID!): Course
-	"Quita a un estudiante de un curso"
 	removeStudentFromCourse(courseId: ID!, studentId: ID!): Course
-	"Agrega un estudiante a un curso"
 	addTeacher(courseId: ID!, teacherId: ID!): Course
-	"Quita a un estudiante de un curso"
 	removeTeacherFromCourse(courseId: ID!, teacherId: ID!): Course
 
-	"Crea un estudiante pasandole el campo avatar"
 	createStudent(input: PersonInput!): Person!
-	"Edita un estudiante"
 	editStudent(id: ID!, input: PersonEditInput!): Person
-	"Elimina un un estudiante"
 	deleteStudent(id: ID!): Person
 
-	"Crea un profesor pasandole el campo age"
 	createTeacher(input: PersonInput!): Person!
-	"Edita un profesor"
 	editTeacher(id: ID!, input: PersonEditInput!): Person
-	"Elimina un un profesor"
 	deleteTeacher(id: ID!): Person
 }

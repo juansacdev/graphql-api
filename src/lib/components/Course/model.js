@@ -7,11 +7,6 @@ const CourseSchema = new Schema(
 			required: true,
 		},
 
-		teacher: {
-			type: String,
-			required: true,
-		},
-
 		description: String,
 		topic: String,
 		level: {
